@@ -43,7 +43,6 @@ class ViewController: UIViewController {
                     let wallView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX,  offsetY: cellOfsetY)
                     wallView.backgroundColor = UIColor.black
                     view.addSubview(wallView)
-                    wallRectArray.append(wallView.frame)
                     
                 case 2: //スタート地点
                     startView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX, offsetY: cellOfsetY)
