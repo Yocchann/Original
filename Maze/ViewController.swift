@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import CoreMotion
 
 class ViewController: UIViewController {
+    
+    var playerView: UIView!
+    var playerMotionManager: CMMotionManager!
+    var speedX: Double = 0.0
+    var speedY: Double = 0.0
     
     let maze = [
         [1,0,0,0,1,0],
@@ -27,6 +33,7 @@ class ViewController: UIViewController {
     
     var startView: UIView!
     var goalView: UIView!
+    var wallRectArray = [CGRect]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +50,7 @@ class ViewController: UIViewController {
                     let wallView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX,  offsetY: cellOfsetY)
                     wallView.backgroundColor = UIColor.black
                     view.addSubview(wallView)
+                    wallRectArray.append(wallView.frame)
                     
                 case 2: //スタート地点
                     startView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX, offsetY: cellOfsetY)
@@ -61,6 +69,17 @@ class ViewController: UIViewController {
             }
             
         }
+            //olayerView 生成
+        playerView = UIView(frame: CGRect(x: 0, y: 0, width: cellWidth, height: cellHeight / 6))
+        playerView.center = startView.center
+        playerView.backgroundColor = UIColor.gray
+        view.addSubview(playerView)
+        
+        //MotionManager 生成
+        playerMotionManager = CMMotionManager()
+        playerMotionManager.accelerometerUpdateInterval = 0.02
+        
+        startAccelemeter()
         
         
         func createView(x: Int, y: Int, width: CGFloat, height: CGFloat, offsetX: CGFloat, offsetY: CGFloat) ->
