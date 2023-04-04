@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         
         //MotionManager 生成
         playerMotionManager = CMMotionManager()
-        playerMotionManager.accelerometerUpdateInterval = 0.02
+        playerMotionManager.accelerometerUpdateInterval = 0.04
         
         startAccelemeter()
     }
