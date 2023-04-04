@@ -80,82 +80,82 @@ class ViewController: UIViewController {
         playerMotionManager.accelerometerUpdateInterval = 0.02
         
         startAccelemeter()
-        
-        
-        func startAccelemeter() {
-            playerMotionManager.startAccelerometerUpdates(to: OperationQueue.current!){ data, err in
-                self.speedX += (data?.acceleration.x)!
-                self.playerView.center.x += self.speedX
-                self.speedY += (data?.acceleration.y)!
-                self.playerView.center.y -= self.speedY
-                
-                if self.playerView.frame.origin.x < 0{
-                    self.playerView.frame.origin.x = 0
-                    self.speedX = 0
-                }
-                else if self.playerView.frame.origin.x > self.view.frame.width - self.playerView.frame.width {
-                    self.playerView.frame.origin.x = self.view.frame.width - self.playerView.frame.width
-                    self.speedX = 0
-                }
-                
-                if self.playerView.frame.origin.y < 0{
-                    self.playerView.frame.origin.y = 0
-                    self.speedY = 0
-                }
-                else if self.playerView.frame.origin.y > self.view.frame.height - self.playerView.frame.height {
-                    self.playerView.frame.origin.y = self.view.frame.height - self.playerView.frame.height
-                    self.speedY = 0
-                }
-                for wallRect in self.wallRectArray {
-                    if wallRect.intersects(self.playerView.frame) {
-                        self.gameCheck(result: "GameOver", message: "壁に当たったよ")
-                        return
-                    }
-                    
-                }
-                if self.goalView.frame.intersects(self.playerView.frame) {
-                    self.gameCheck(result: "clear", message: "クリアしたよ！")
+    }
+    
+    func startAccelemeter() {
+        playerMotionManager.startAccelerometerUpdates(to: OperationQueue.current!){ data, err in
+            self.speedX += (data?.acceleration.x)!
+            self.playerView.center.x += self.speedX
+            self.speedY += (data?.acceleration.y)!
+            self.playerView.center.y -= self.speedY
+            
+            if self.playerView.frame.origin.x < 0{
+                self.playerView.frame.origin.x = 0
+                self.speedX = 0
+            }
+            else if self.playerView.frame.origin.x > self.view.frame.width - self.playerView.frame.width {
+                self.playerView.frame.origin.x = self.view.frame.width - self.playerView.frame.width
+                self.speedX = 0
+            }
+            
+            if self.playerView.frame.origin.y < 0{
+                self.playerView.frame.origin.y = 0
+                self.speedY = 0
+            }
+            else if self.playerView.frame.origin.y > self.view.frame.height - self.playerView.frame.height {
+                self.playerView.frame.origin.y = self.view.frame.height - self.playerView.frame.height
+                self.speedY = 0
+            }
+            for wallRect in self.wallRectArray {
+                if wallRect.intersects(self.playerView.frame) {
+                    self.gameCheck(result: "GameOver", message: "壁に当たったよ")
                     return
                 }
                 
             }
-        }
-        
-        func createView(x: Int, y: Int, width: CGFloat, height: CGFloat, offsetX: CGFloat, offsetY: CGFloat) ->
-        UIView {
-            let rect = CGRect(x: 0, y: 0, width: width, height: height)
-            let view = UIView(frame: rect)
-            
-            let center = CGPoint(x: offsetX + width * CGFloat(x), y: offsetY + height * CGFloat(y))
-            
-            view.center = center
-            
-            return view
-        }
-        func retty() {
-            //位置初期化
-            playerView.center = startView.center
-            //センサースタート
-            if !playerMotionManager.isAccelerometerActive {
-                startAccelemeter()
+            if self.goalView.frame.intersects(self.playerView.frame) {
+                self.gameCheck(result: "clear", message: "クリアしたよ！")
+                return
             }
-            //speed初期化
-            speedX = 0.0
-            speedY = 0.0
-        }
-        func gameCheck(result: String, message: String) {
-            //加速度とめる
-            if playerMotionManager.isAccelerometerActive {
-                playerMotionManager.stopAccelerometerUpdates()
-            }
-            let gameCheckAlert: UIAlertController = UIAlertController(title: result, message: message, preferredStyle: .alert)
             
-            let retryAction = UIAlertAction(title: "もう一度", style: .default, handler:  {
-        (action: UIAlertAction!) -> Void in
-                self.retty()
-            })
-            gameCheckAlert.addAction(retryAction)
-            self.present(gameCheckAlert, animated: true, completion: nil)
         }
     }
+    
+    func createView(x: Int, y: Int, width: CGFloat, height: CGFloat, offsetX: CGFloat, offsetY: CGFloat) ->
+    UIView {
+        let rect = CGRect(x: 0, y: 0, width: width, height: height)
+        let view = UIView(frame: rect)
+        
+        let center = CGPoint(x: offsetX + width * CGFloat(x), y: offsetY + height * CGFloat(y))
+        
+        view.center = center
+        
+        return view
+    }
+    func retry() {
+        //位置初期化
+        playerView.center = startView.center
+        //センサースタート
+        if !playerMotionManager.isAccelerometerActive {
+            startAccelemeter()
+        }
+        //speed初期化
+        speedX = 0.0
+        speedY = 0.0
+    }
+    func gameCheck(result: String, message: String) {
+        //加速度とめる
+        if playerMotionManager.isAccelerometerActive {
+            playerMotionManager.stopAccelerometerUpdates()
+        }
+        let gameCheckAlert: UIAlertController = UIAlertController(title: result, message: message, preferredStyle: .alert)
+        
+        let retryAction = UIAlertAction(title: "もう一度", style: .default, handler:  {
+    (action: UIAlertAction!) -> Void in
+            self.retry()
+        })
+        gameCheckAlert.addAction(retryAction)
+        self.present(gameCheckAlert, animated: true, completion: nil)
+    }
 }
+
