@@ -2,6 +2,7 @@
 迷路アプリ Life is Tech!   
 春キャン2023 京都芸術大学。  
 迷路の難易度変更の仕方  
+（初期設定は0.04で少し簡単にしています）。  
 まず、ViewControllerを開きます。
 ```
 playerMotionManager.accelerometerUpdateInterval
