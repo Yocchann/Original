@@ -48,18 +48,18 @@ class ViewController: UIViewController {
                 switch maze[y][x] {
                 case 1: //ゲームオーバーのマス
                     let wallView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX,  offsetY: cellOfsetY)
-                    wallView.backgroundColor = UIColor.black
+                    wallView.backgroundColor = UIColor(0, 0, 0)
                     view.addSubview(wallView)
                     wallRectArray.append(wallView.frame)
                     
                 case 2: //スタート地点
                     startView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX, offsetY: cellOfsetY)
-                    startView.backgroundColor =  UIColor.green
+                    startView.backgroundColor =  UIColor(129, 181, 70)
                     view.addSubview(startView)
                     
                 case 3: //ゴール
                     goalView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX, offsetY: cellOfsetY)
-                    goalView.backgroundColor = UIColor.red
+                    goalView.backgroundColor = UIColor(hex: "FF5454")
                     view.addSubview(goalView)
                     
                     
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
                 
             }
             if self.goalView.frame.intersects(self.playerView.frame) {
-                self.gameCheck(result: "clear", message: "クリアしたよ！")
+                self.gameCheck(result: "Clear!", message: "クリアしたよ！")
                 return
             }
             
