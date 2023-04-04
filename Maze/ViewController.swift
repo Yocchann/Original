@@ -79,7 +79,7 @@ class ViewController: UIViewController {
         
         //MotionManager 生成
         playerMotionManager = CMMotionManager()
-        playerMotionManager.accelerometerUpdateInterval = 0.04
+        playerMotionManager.accelerometerUpdateInterval = 0.03
         
         startAccelemeter()
     }
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
             }
             for wallRect in self.wallRectArray {
                 if wallRect.intersects(self.playerView.frame) {
-                    self.gameCheck(result: "GameOver", message: "壁に当たったよ")
+                    self.gameCheck(result: "GameOver", message: "壁に当たったよ。がんばって！")
                     return
                 }
                 
@@ -156,7 +156,7 @@ class ViewController: UIViewController {
         }
         let gameCheckAlert: UIAlertController = UIAlertController(title: result, message: message, preferredStyle: .alert)
         
-        let retryAction = UIAlertAction(title: "もう一度", style: .default, handler:  {
+        let retryAction = UIAlertAction(title: "もう一度！", style: .default, handler:  {
     (action: UIAlertAction!) -> Void in
             self.retry()
         })
@@ -166,3 +166,4 @@ class ViewController: UIViewController {
 }
 
 //masterでプッシュしますように....!
+//無事プッシュしたよ！良かったね〜
