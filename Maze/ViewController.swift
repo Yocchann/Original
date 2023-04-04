@@ -8,6 +8,8 @@
 import UIKit
 import CoreMotion
 
+
+
 class ViewController: UIViewController {
     
     var playerView: UIView!
@@ -80,6 +82,10 @@ class ViewController: UIViewController {
         playerMotionManager.accelerometerUpdateInterval = 0.04
         
         startAccelemeter()
+    }
+    //ステータスバーの非表示
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     func startAccelemeter() {
