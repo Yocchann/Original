@@ -54,12 +54,12 @@ class ViewController: UIViewController {
                     
                 case 2: //スタート地点
                     startView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX, offsetY: cellOfsetY)
-                    startView.backgroundColor =  UIColor(129, 181, 70)
+                    startView.backgroundColor =  UIColor(hex: "384E7D")
                     view.addSubview(startView)
                     
                 case 3: //ゴール
                     goalView = createView(x: x, y: y, width: cellWidth, height: cellHeight, offsetX: cellOffsetX, offsetY: cellOfsetY)
-                    goalView.backgroundColor = UIColor(hex: "FF5454")
+                    goalView.backgroundColor = UIColor(hex: "C1FF72")
                     view.addSubview(goalView)
                     
                     
