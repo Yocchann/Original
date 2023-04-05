@@ -120,7 +120,7 @@ class ViewController: UIViewController {
                 
             }
             if self.goalView.frame.intersects(self.playerView.frame) {
-                self.gameCheck(result: "クリア！", message: "まいやんは無事ゴールできたよ！\nおめでとう！")
+                self.gameCheck(result: "ゲームクリア！", message: "まいやんは無事ゴールできたよ！\nおめでとう！")
                 return
             }
             
