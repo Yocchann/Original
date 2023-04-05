@@ -74,12 +74,12 @@ class ViewController: UIViewController {
         //playerView 生成
         playerView = UIView(frame: CGRect(x: 0, y: 0, width: cellWidth / 6, height: cellHeight / 6))
         playerView.center = startView.center
-        playerView.backgroundColor = UIColor.gray
+        playerView.backgroundColor = UIColor(hex: "FAB9AD")
         view.addSubview(playerView)
         
         //MotionManager 生成
         playerMotionManager = CMMotionManager()
-        playerMotionManager.accelerometerUpdateInterval = 0.03
+        playerMotionManager.accelerometerUpdateInterval = 0.04
         
         startAccelemeter()
     }
